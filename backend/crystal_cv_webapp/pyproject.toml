@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "crystalcv"
+version = "0.1.0"
+description = ""
+authors = ["Peter Nociar <pnociar@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pydantic = "^1.9.0"
+Flask = "^2.1.1"
+connexion = {extras = ["swagger-ui"], version = "^2.13.0"}
+Flask-Migrate = "^3.1.0"
+Flask-SQLAlchemy = "^2.5.1"
+psycopg2 = "^2.9.3"
+pydantic-sqlalchemy = "^0.0.9"
+passlib = "^1.7.4"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

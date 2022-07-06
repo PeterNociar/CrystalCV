@@ -1,0 +1,145 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Crystal CV
+  description: CV management app
+
+security:
+  - BearerAuthGoogle: []
+  - BasicAuth: []
+  - {}
+
+paths:
+  /register:
+    post:
+      operationId: crystalcv.views.register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: User companies
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        default:
+          $ref: '#/components/responses/DefaultError'
+
+  /companies:
+    get:
+      operationId: crystalcv.views.get_companies
+      responses:
+        '200':
+          description: User companies
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        default:
+          $ref: '#/components/responses/DefaultError'
+    post:
+      operationId: crystalcv.views.add_company
+      responses:
+        '200':
+          description: Add company
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        default:
+          $ref: '#/components/responses/DefaultError'
+
+  /companies/{company_id}:
+    put:
+      operationId: crystalcv.views.update_company
+      responses:
+        '200':
+          description: Update company
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        default:
+          $ref: '#/components/responses/DefaultError'
+    delete:
+      operationId: crystalcv.views.delete_company
+      responses:
+        '200':
+          description: Delete company
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        default:
+          $ref: '#/components/responses/DefaultError'
+
+  /company/{company_id}/project:
+    post:
+      operationId: crystalcv.views.add_project
+      responses:
+        '200':
+          description: Add project
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        default:
+          $ref: '#/components/responses/DefaultError'
+
+  /company/{company_id}/project/{project_id}:
+    put:
+      operationId: crystalcv.views.update_project
+      responses:
+        '200':
+          description: Update project
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        default:
+          $ref: '#/components/responses/DefaultError'
+    delete:
+      operationId: crystalcv.views.delete_project
+      responses:
+        '200':
+          description: Delete project
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        default:
+          $ref: '#/components/responses/DefaultError'
+
+
+components:
+  securitySchemes:
+    BearerAuthGoogle:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      x-bearerInfoFunc: crystalcv.auth.decode_token
+    BasicAuth:
+      type: http
+      scheme: basic
+      x-basicInfoFunc: crystalcv.auth.get_user_basic
+
+  responses:
+    ValidationError:
+      description: Validation error. List of errors with field name as keys
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    DefaultError:
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string

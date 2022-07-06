@@ -1,0 +1,114 @@
+SManager:
+    LoginScreen:
+        MDCard:
+            size_hint: 0.8, 0.8
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            elevation: 10
+            padding: 25
+            spacing: 25
+            orientation: 'vertical'
+
+            MDLabel:
+                id: welcome_label
+                text: 'Login'
+                font_size: 40
+                halign: 'center'
+                size_hint_y: None
+
+            MDTextField:
+                id: login_username
+                font_size: 30
+                hint_text: "username"
+                pos_hint: {'center_x': 0.5}
+                mode: "rectangle"
+                write_tab: False
+
+            MDTextField:
+                id: login_password
+                font_size: 30
+                hint_text: "password"
+                pos_hint: {'center_x': 0.5}
+                mode: "rectangle"
+                password: True
+                write_tab: False
+
+            MDRoundFlatButton:
+                id: login_button
+                font_size: 25
+                text: "Login"
+                pos_hint: {'center_x': 0.5}
+                on_release:
+                    app.login(login_username.text, login_password.text)
+
+            MDRoundFlatButton:
+                id: login_cancel_button
+                font_size: 25
+                text: "Clear"
+                pos_hint: {'center_x': 0.5}
+                on_release: app.clear_login_screen()
+
+            MDRoundFlatButton:
+                id: login_register_button
+                font_size: 25
+                text: "Register"
+                pos_hint: {'center_x': 0.5}
+                on_release: app.root.current = "register"
+
+    RegisterScreen:
+        MDCard:
+            size_hint: 0.8, 0.8
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            elevation: 10
+            padding: 25
+            spacing: 25
+            orientation: 'vertical'
+
+            MDLabel:
+                id: welcome_label
+                text: 'Register'
+                font_size: 40
+                halign: 'center'
+                size_hint_y: None
+
+            MDTextField:
+                id: username
+                font_size: 30
+                hint_text: "username"
+                pos_hint: {'center_x': 0.5}
+                mode: "rectangle"
+                write_tab: False
+
+            MDTextField:
+                id: password
+                font_size: 30
+                hint_text: "password"
+                pos_hint: {'center_x': 0.5}
+                mode: "rectangle"
+                password: True
+                write_tab: False
+
+            MDTextField:
+                id: password
+                font_size: 30
+                hint_text: "confirm password"
+                pos_hint: {'center_x': 0.5}
+                mode: "rectangle"
+                password: True
+                write_tab: False
+
+            MDRoundFlatButton:
+                id: register_button
+                font_size: 25
+                text: "Register"
+                pos_hint: {'center_x': 0.5}
+                on_release: app.register(username.text, password.text)
+
+            MDRoundFlatButton:
+                font_size: 25
+                text: "Login"
+                pos_hint: {'center_x': 0.5}
+                on_release:
+                    app.root.current = "login"
+
+
+    MainScreen:
